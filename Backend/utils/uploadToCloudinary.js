@@ -9,7 +9,7 @@ const UploadFile=async(file,folder,height,quality)=>{
         option.quality=quality;
       }
       option.resource_type="auto";
-      return await cloudinary.Uploader.upload(file.tempFilePath,optiom);
+      return await cloudinary.uploader.upload(file,option);
 }
 
 module.exports=UploadFile;

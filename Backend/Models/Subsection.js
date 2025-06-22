@@ -9,9 +9,9 @@ const SubsectionSchema=mongoose.Schema({
         type:String,
         required:true,
     },
-    videoUrl:{
+    videoUrl:[{
         type:String,
-    },
+    }],
     duration:{
         type:String,
     },
@@ -21,6 +21,6 @@ const SubsectionSchema=mongoose.Schema({
     }
 })
 
-const subsectionModel=mongoose.model("SubSection",SubsectionSchema);
+const Subsection=mongoose.model("Subsection",SubsectionSchema);
 
-module.exports=subsectionModel;
+module.exports=Subsection;

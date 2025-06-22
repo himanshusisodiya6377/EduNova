@@ -23,13 +23,21 @@ const courseSchema=mongoose.Schema({
         type:String,
         required:true,
     },
-    Instruction:[{
+    Instructions:[{
         type:String,
         required:true,
     }],
+    thumbnail:{
+        type:String,
+       //required:true,
+    },
     CourseUsers:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User",
+    }],
+    section:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Section"
     }],
     RatingandReview:[{
         type:mongoose.Schema.Types.ObjectId,

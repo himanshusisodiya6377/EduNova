@@ -16,6 +16,10 @@ const userSchema=mongoose.Schema({
         required:true,
         trim:true,
     },
+    email:{
+        type:String,
+        required:true,
+    },
     accountType:{
         type:String,
         enum:["Student","Admin","Instructor"]
@@ -24,7 +28,7 @@ const userSchema=mongoose.Schema({
          type:mongoose.Schema.Types.ObjectId,
         ref:"Profile",
     },
-    coures:[{
+    courses:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Course",
     }],

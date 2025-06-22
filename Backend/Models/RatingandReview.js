@@ -12,7 +12,11 @@ const ratingreviewSchema=mongoose.Schema({
     review:{
        type:String,
        required:true,
-    }
+    },
+    Course:{
+       type:mongoose.Schema.Types.ObjectId,
+       ref:"Course",
+    },
 })
 
 const ratingreviewModel=mongoose.model("RatingReview",ratingreviewSchema);

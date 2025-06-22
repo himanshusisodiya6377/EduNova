@@ -18,14 +18,14 @@ const otpSchema=mongoose.Schema({
 //email code
 //function
 //lovebabbar way was too complicate you can do it this efficient way
-otpSchema.post("save",async function(next){
+otpSchema.post("save",async function(doc){
     try{
-    await sendEmail(this.email,this.otp);
+    await sendEmail(doc.email,doc.otp);
     next();
     }
     catch(error){
         console.error(error);
-        next(error);
+       //next(error);
     }
 });
 

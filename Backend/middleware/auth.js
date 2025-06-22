@@ -1,10 +1,11 @@
-const jwt=require("jasonwebtoken")
+const jwt=require("jsonwebtoken")
 require("dotenv").config()
 
 const Auth=async(req,res,next)=>{
     try{
-       const token=req.cookie.token || req.body.token || req.header("Authorization")?.replace("Bearer ", "");
+       const token=req.cookies.token || req.body.token || req.header("Authorization")?.replace("Bearer ", "");
        
+       //console.log(token);
        if(!token){
         return res.status(401).json({
             success:false,
@@ -21,10 +22,10 @@ const Auth=async(req,res,next)=>{
        }
 
        req.user=payload;
-       return res.status(201).json({
-        success:true,
-        message:"user is verified!",
-       })
+    //    return res.status(201).json({
+    //     success:true,
+    //     message:"user is verified!",
+    //    })
        next();
     }
     catch(error){
@@ -48,10 +49,10 @@ const isStudent=async(req,res,next)=>{
         })
        }
 
-       return res.status(200).json({
-        success:true,
-        message:"user student auth success!"
-       })
+    //    return res.status(200).json({
+    //     success:true,
+    //     message:"user student auth success!"
+    //    })
        next();
     }
     catch(error){
@@ -72,10 +73,10 @@ const isInstructor=async(req,res,next)=>{
         })
        }
 
-       return res.status(200).json({
-        success:true,
-        message:"user Instructor auth success!"
-       })
+    //    return res.status(200).json({
+    //     success:true,
+    //     message:"user Instructor auth success!"
+    //    })
        next();
     }
     catch(error){
@@ -112,4 +113,4 @@ const isAdmin=async(req,res,next)=>{
 }
 
 
-module.exports={isAdmin,isInstructor,isStudent};
+module.exports={Auth,isAdmin,isInstructor,isStudent};
