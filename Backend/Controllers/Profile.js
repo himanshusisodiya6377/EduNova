@@ -7,22 +7,23 @@ const creatprofile=async(req,res)=>{
         const{phone,gender,dob,about}=req.body;
         const userId=req.user.id;
 
-        const user=await userModel.findById({id:userId});
-        
+        const user=await userModel.findById({_id:userId});
+        // console.log(user);
         if(!user){
             return res.status(401).json({
                 success:false,
                 message:"user doesnot exists!"
             })
         }
-
-        const profile=ProfileModel.creat({
-            gender,about,dob,phone
+    //    console.log(  gender,about,dob,phone)
+        const profile=await ProfileModel.create({
+            gender,about,DOB:dob,phone
         })
-
-        const updateuser=userModel.findByIdAndUpdate({id:userId},{
+        // console.log("hi2")
+         console.log(profile)
+        const updateuser=await userModel.findByIdAndUpdate({_id:userId},{
             Profile:profile._id,
-        }).populate("Profile")
+        },  {new:true})
 
         return res.status(201).json({
             success:true,
@@ -31,7 +32,10 @@ const creatprofile=async(req,res)=>{
         })
     }
     catch(error){
-
+           return res.status(401).json({
+            success:false,
+            message:"profile creation failed!"
+           })
     }
 }
 
@@ -49,7 +53,7 @@ const deleteprofile=async(req,res)=>{
           const userId=req.user.id;
           const{profileId}=req.body;
 
-          const user=await userModel.findByIdAndUpdate({id:userId},{Profile:null})
+          const user=await userModel.findByIdAndUpdate({_id:userId},{Profile:null})
           await ProfileModel.findByIdAndDelete(profileId);
 
           return res.status(201).json({

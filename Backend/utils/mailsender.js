@@ -2,7 +2,7 @@ const nodemailer=require("nodemailer");
 require("dotenv").config();
 
 //functio that can be call anywhere to send mail
-const SendMail=async(email,otp)=>{
+const SendMail=async(email,title,body)=>{
     try{
 
         //transporter
@@ -18,8 +18,8 @@ const SendMail=async(email,otp)=>{
         const response=await transporter.sendMail({
             from:"hsisodia988766@gmail.com",
             to:email,
-            subject:"otp aaya he",
-            text:otp,
+            subject:body,
+            text:title,
         })
         
         console.log(response);

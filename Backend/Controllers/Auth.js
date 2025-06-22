@@ -135,6 +135,10 @@ const login=async(req,res)=>{
                 message:"user login successfully!"
             })
         }
+        return res.status(401).json({
+            success:false,
+            message:"password is wrong"
+        })
         
     }
     catch(error){

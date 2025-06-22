@@ -16,6 +16,12 @@ const userSchema=mongoose.Schema({
         required:true,
         trim:true,
     },
+     token: {
+    type: String,
+  },
+  Expires: {
+    type: Date,
+  },
     email:{
         type:String,
         required:true,
@@ -24,7 +30,7 @@ const userSchema=mongoose.Schema({
         type:String,
         enum:["Student","Admin","Instructor"]
     },
-    profile:{
+    Profile:{
          type:mongoose.Schema.Types.ObjectId,
         ref:"Profile",
     },

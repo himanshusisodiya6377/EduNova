@@ -18,4 +18,4 @@ const profileSchema=mongoose.Schema({
 
 const profileModel=mongoose.model("Profile",profileSchema);
 
-module.exports=profileSchema;
+module.exports=profileModel;
