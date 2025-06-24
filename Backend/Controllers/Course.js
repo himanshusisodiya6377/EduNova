@@ -2,6 +2,8 @@ const upload=require("../utils/uploadToCloudinary");
 require("dotenv").config();
 const Course=require("../Models/Course");
 const User = require("../Models/User");
+const subsection=require("../Models/Subsection")
+const Section=require("../Models/Section")
 //const Category=require("../Models/Category");
 
 
@@ -121,4 +123,87 @@ exports.getAllcourses=async(req,res)=>{
     }
 }
 
+exports.deletecourse=async(req,res)=>{
+    try{
+        const {courseId}=req.body;
+        const userId=req.user.id;
 
+        const course=await Course.findOne({_id:courseId});
+
+        if(!course){
+            return res.status(401).json({
+                succss:false,
+                message:"course doesnot exist!"
+            })
+        }
+
+        //remove for students
+        const students=course.CourseUsers;
+        if(students){
+            for(const user of students){
+            await User.findOneAndUpdate({_id:user},{
+                $pull:{courses:courseId},
+            }
+          )
+        }
+        }
+
+       
+
+        //remove subsection
+        const section = course.section;
+        // console.log(section);
+        for(const sec of section){
+             const sectionDoc = await Section.findById(sec);
+            for(const sub of sectionDoc.subSection){
+               await subsection.findByIdAndDelete(sub);
+            }
+            await Section.findByIdAndDelete(sec);
+        }
+        
+        //deleting course itself
+        await Course.findByIdAndDelete(courseId);
+
+        return res.status(200).json({
+            success:true,
+            message:"course deleted successfully!"
+        })
+    }
+    catch(error){
+         console.error(error);
+         return res.status(401).json({
+            success:false,
+            message:"deletion of course failed!"
+         })
+    }
+}
+
+exports.getInstructorcourse=async(req,res)=>{
+    try{
+        const userId=req.user.id;
+
+        const user=await User.findOne({_id:userId}).populate("courses").populate("Profile");
+
+        if(!user){
+            return res.status(401).json({
+                success:false,
+                message:"user doesnot exist!"
+            })
+        }
+
+        return res.status(200).json({
+            success:true,
+            message:"fetching successfully!",
+            user
+        })
+
+        
+    }
+    catch(error){
+            console.error(error);
+         return res.status(401).json({
+            success:false,
+            message:"deletion of course failed!"
+         })
+    }
+}
