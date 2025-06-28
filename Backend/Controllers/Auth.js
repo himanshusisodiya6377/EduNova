@@ -5,6 +5,7 @@ const jwt=require("jsonwebtoken")
 require("dotenv").config()
 const Otpgenerator=require("otp-generator")
 
+
 //sigup
 const Singup=async(req,res)=>{
     try{
@@ -19,7 +20,7 @@ const Singup=async(req,res)=>{
             phone,
          }=req.body;
 
-         if(!firstname || !lastname || !email || !password || !confirmpassword || !otp || !accountType || !phone){
+         if(!firstname || !lastname || !email || !password || !confirmpassword || !otp || !accountType){
             return res.status(401).json({
                 success:false,
                 message:"please fill all credentials"
@@ -58,7 +59,7 @@ const Singup=async(req,res)=>{
             })
          }
 
-          
+        const imgUrl = `https://robohash.org/${firstname}`;
         const hashpwd=await bcrypt.hash(password,10);
 
          const user=await User.create({
@@ -67,7 +68,7 @@ const Singup=async(req,res)=>{
             email,
             password:hashpwd,
             accountType,
-            phone,
+            thumbnail:imgUrl
          }) 
      
          console.log(user);
@@ -86,10 +87,7 @@ const Singup=async(req,res)=>{
          })
     }
 }
-
-
 //login
-
 const login=async(req,res)=>{
     try{
         const {email,password}=req.body;
@@ -123,7 +121,7 @@ const login=async(req,res)=>{
             })
 
             const option={
-                httpOnly:true,
+                httpOnly:true,//not allowed to access in simple js document.cookie
                 expiresIn:new Date(Date.now+300000),
             }
 
@@ -131,7 +129,8 @@ const login=async(req,res)=>{
 
             return res.status(201).json({
                 success:true,
-                token,
+                payload,
+                user,
                 message:"user login successfully!"
             })
         }
@@ -150,6 +149,32 @@ const login=async(req,res)=>{
     }
 }
 
+const logout=async(req,res)=>{
+    try{
+      const token=req.cookies.token || req.body.token || req.header("Authorization")?.replace("Bearer ", "");
+      console.log(token)
+      if(token){
+        res.clearCookie("token",{
+            httpOnly:true,
+        })
+        return res.status(200).json({
+        success: true,
+        message: "Logout successful",
+      });
+      }
+      else return res.status(401).json({
+        success:false,
+        message:"no token exists!"
+      })
+    }
+    catch(error){
+         console.error(error);
+          return res.status(401).json({
+            success:false,
+            message:"logout fail!"
+        })
+    }
+}
 
 const sendOtp=async(req,res)=>{
     try{
@@ -194,4 +219,40 @@ const sendOtp=async(req,res)=>{
     }
 }
 
-module.exports={sendOtp,login,Singup};
+//verifytoken
+const verifytoken=async(req,res)=>{
+    try{
+      const token=req.cookies.token || req.body.token || req.header("Authorization")?.replace("Bearer ", "");
+       
+       //console.log(token);
+       if(!token){
+        return res.status(401).json({
+            success:false,
+            message:"token doesnt exist",
+        })
+       }
+       const payload=await jwt.verify(token,process.env.SECRET_KEY); 
+       
+       if(!payload){
+        return res.status(401).json({
+            success:false,
+            message:"token verification fail!",
+        })
+       }
+      const user=User.findOne({_id:payload._id});
+       req.user=payload;
+       return res.status(201).json({
+        success:true,
+        message:"user is verified!",
+       })
+    }
+    catch(error){
+         console.error(error);
+      return res.status(401).json({
+        success:false,
+        user,
+        message:"user authentication failed!"
+      })
+    }
+}
+module.exports={sendOtp,login,Singup,logout,verifytoken};

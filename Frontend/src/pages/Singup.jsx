@@ -5,13 +5,15 @@ import singup from "../assets/Images/signup.webp"
 import Image from '../Component/Auth/Image'
 import { useState } from 'react'
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { useEffect } from 'react'
+import axios from "axios";
 
 const Singup = () => {
    const[data,setData]=useState({
       firstname:"",
       lastname:"",
       email:"",
-      creatpassword:"",
+      password:"",
       confirmpassword:""
      })
    const[showpass1,setShowpass1]=useState(false)
@@ -20,13 +22,27 @@ const Singup = () => {
   //toogle true for student
   const[role,setRole]=useState(true)
   
-     const handleSubmit=(event)=>{
+   useEffect(() => {
+  setData(prev => ({
+    ...prev,
+    accountType: role ? "Student" : "Instructor"
+  }));
+}, [role]); 
+
+     const handleSubmit=async(event)=>{
          event.preventDefault();
          //baki code yaha hoga
-         const payload={
-          data,Role:role?"Student":"Instructor"
+         try{
+            const response=await axios.post("http://localhost:5173/EduNova/User/singup",{
+              data},{
+                withCredentials:true,
+              });
+              console.log(response);
          }
-         console.log(payload);
+         catch(error){
+          console.log(error);
+         }
+        
      }
   return (
     <div className='bg-[#000814] lg:h-screen  justify-between flex'>
@@ -38,11 +54,11 @@ const Singup = () => {
         {/* toggle div */}
         <div className=' flex  bg-slate-700 rounded-full w-fit p-1 mt-6 items-center justify-between text-md cursor-pointer '>
           <div 
-          className={role?"bg-[#000814]  rounded-full px-4 p-2 text-white":"text-gray-400 rounded-full px-4 p-2"} onClick={()=>setRole(!role)}>
+          className={role?"bg-[#000814] cursor-pointer rounded-full px-4 p-2 text-white":"text-gray-400 cursor-pointer rounded-full px-4 p-2"} onClick={()=>setRole(true)}>
             Student
           </div>
           
-          <div className={role?"rounded-full px-4 p-2 text-gray-400":"bg-[#000814] text-white rounded-full px-4 p-2"} onClick={()=>setRole(!role)}>
+          <div className={role?"rounded-full px-4 p-2 text-gray-400 cursor-pointer":"bg-[#000814] text-white cursor-pointer rounded-full px-4 p-2"} onClick={()=>setRole(false)}>
             Instructor
           </div>
         </div>
@@ -134,7 +150,7 @@ const Singup = () => {
           <input
           className='p-2 rounded-md bg-slate-700 text-white py-3 outline-none'
             type={showpass1?"text":"password"}
-            name='creatpassword'
+            name='password'
             placeholder='Enter First Name'
             required
             value={data.creatpassword}
@@ -170,6 +186,7 @@ const Singup = () => {
             [e.target.name]: e.target.value
             }))}
           />
+          {/* code to check whether eye has to be show or not/\ */}
           <span className='absolute text-white right-3 translate-y-12 cursor-pointer'
           onClick={() => setShowpass2(!showpass2)}>
             {showpass2?<AiOutlineEye/>:<AiOutlineEyeInvisible/>}

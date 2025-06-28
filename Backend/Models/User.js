@@ -44,7 +44,11 @@ const userSchema=mongoose.Schema({
     courseProgress:[{
           type:mongoose.Schema.Types.ObjectId,
           ref:"CourseProgress",
-    }]
+    }],
+    thumbnail:{
+        type:String,
+        required:true
+    }
 })
 
 const userModel=mongoose.model("User",userSchema);

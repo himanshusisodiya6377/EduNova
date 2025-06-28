@@ -1,5 +1,6 @@
 const jwt=require("jsonwebtoken")
 require("dotenv").config()
+const User=require("../Models/User")
 
 const Auth=async(req,res,next)=>{
     try{
@@ -20,7 +21,7 @@ const Auth=async(req,res,next)=>{
             message:"token verification fail!",
         })
        }
-
+      const user=User.findOne({_id:payload._id});
        req.user=payload;
     //    return res.status(201).json({
     //     success:true,
@@ -32,6 +33,7 @@ const Auth=async(req,res,next)=>{
       console.error(error);
       return res.status(401).json({
         success:false,
+        user,
         message:"user authentication failed!"
       })
     }
@@ -96,11 +98,6 @@ const isAdmin=async(req,res,next)=>{
             message:"user is not authenticate as Admin!"
         })
        }
-
-       return res.status(200).json({
-        success:true,
-        message:"user Admin auth success!"
-       })
        next();
     }
     catch(error){

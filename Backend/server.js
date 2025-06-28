@@ -8,11 +8,21 @@ const Contact=require("./Routes/Contact")
 const Course=require("./Routes/Course")
 const user=require("./Routes/user");
 const cookieParser = require("cookie-parser");
+const cors = require('cors');
+const Category=require("./Routes/Category")
+
 
 PORT=process.env.PORT || 8080;
 
-//start the server
 const app=express();
+
+//connecting to frontend
+app.use(cors({
+  origin: 'http://localhost:5173',  // replace with your frontend port
+  credentials: true                // if you're sending cookies
+}));
+
+//start the server
 app.use(express.json());
 app.use(cookieParser());
 //cloudinary setup
@@ -39,7 +49,7 @@ app.use("/EduNova/Profile",Profile);
 app.use("/EduNova",Contact);
 app.use("/EduNova/Course",Course);
 app.use("/EduNova/User",user);
-
+app.use("/EduNova/Admin",Category);
 //listening req at / route
 app.use("/",(req,res)=>{
     res.send("yes its the home page!");

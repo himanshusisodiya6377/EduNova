@@ -6,20 +6,37 @@ import login from "../assets/Images/login.webp"
 import { useState } from 'react'
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { NavLink } from 'react-router-dom'
-
+import axios from 'axios'
+import { useContext } from 'react'
+import {AuthContext} from "../ContextApi/Auth"
 
 //page for login and singup 
 const Login = () => {
-   const[data,setData]=useState({
+    const { data,isLog,setData,setLog } =useContext(AuthContext);
+
+   const[data1,setData1]=useState({
     email:"",
     password:""
    })
    const[showpass,setShowpass]=useState(false)
 
-   const handleSubmit=(event)=>{
+   const handleSubmit=async(event)=>{
       event.preventDefault();
-        console.log("Form submitted");
-      console.log(data)
+     try{
+      //sending data to backend using axios
+          const response=await axios.post("http://localhost:3000/EduNova/User/login",data1,{withCredentials:true,});
+          setData(response.data.user);
+          setLog(true);
+          setData1({
+            email:"",
+            password:""
+          })
+     }
+     catch(error){
+      console.log(error);
+      setData(null);
+          setLog(false);
+     }
     // baki code idr hoga
    }
 
@@ -40,13 +57,13 @@ const Login = () => {
            </div>
             </label>
             <input 
-            className='p-3 rounded-md bg-slate-700 py-3 outline-none'
+            className='p-3 text-white rounded-md bg-slate-700 py-3 outline-none'
             name="email"
-            value={data.email}
+            value={data1.email}
             required
             placeholder="Enter email address"
             type="email"
-             onChange={(e) => setData(prev => ({
+             onChange={(e) => setData1(prev => ({
             ...prev,
             [e.target.name]: e.target.value
             }))}
@@ -64,12 +81,15 @@ const Login = () => {
              </label>
             <input 
             className='p-3 rounded-md bg-slate-700 text-white py-3 outline-none'
+            //help in unique identification
             name="password"
-            value={data.password}
+            //showing value jo padi hogi
+            value={data1.password}
             required
             placeholder="Enter Password"
+            //for whether is to show pasword or not
             type={showpass ?"text" :"password"}
-           onChange={(e) => setData(prev => ({
+           onChange={(e) => setData1(prev => ({
             ...prev,
            [e.target.name]: e.target.value
             }))}

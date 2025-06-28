@@ -30,9 +30,10 @@ const DottedSection = () => {
 
   return (
     <div className='flex flex-col mx-auto mb-12'>
+    {/* mapping to all values  */}
   {TimeLine.map((element, index) => (
-    <div className='flex flex-col'>
-        <div key={index} className='flex flex-row gap-6 mb-2'>
+    <div key={index} className='flex flex-col'>
+        <div  className='flex flex-row gap-6 mb-2'>
       <div className='rounded-full bg-[#FFFF] border-2 p-4'>
       <img src={element.Logo}/>
       </div>
@@ -49,9 +50,7 @@ const DottedSection = () => {
       {index !== TimeLine.length - 1 && (
         <div className="border-l-2 border-dotted translate-x-2 -translate-y-1 border-gray-400 h-8 ml-5"></div>
       )}
-    </div>
-   
-     
+    </div>     
   ))}
 </div>
   )
