@@ -1,8 +1,11 @@
 import React from 'react'
 import { useState } from 'react'
 import Button from './Button'
+import axios from 'axios'
+import { toast } from 'react-hot-toast';
 
-const Contactform = ({heading,subheading}) => {
+
+const Contactform = ({heading,subheading,action}) => {
      const[data,setData]=useState({
         firstname:"",
       lastname:"",
@@ -10,9 +13,33 @@ const Contactform = ({heading,subheading}) => {
       phone:"",
       message:""
     })
+
+    const handleFrom=async(e)=>{
+      try{  
+        e.preventDefault();
+        setData({
+          firstname:"",
+      lastname:"",
+      email:"",
+      phone:"",
+      message:""
+        })
+      await axios.post("http://localhost:3000/EduNova/contactus",data,{
+          withCredentials:true,
+        })
+          toast.success('Form submitted successfully!',{
+            duration: 3000,
+          });
+      }
+      catch(error){
+        console.log(error);
+        
+      }
+    }
+
   return (
     <div>
-         <form className=' flex flex-col gap-2 items-center bg-[#000814] border-2 border-gray-500 rounded-md'>
+         <form onSubmit={handleFrom} className={` flex flex-col gap-2 items-center ${action ? "border-2 border-gray-500" : "" } bg-[#000814] rounded-md`}>
                 <p className='text-white font-semibold text-4xl w-[90%] mt-10'>{heading}</p>
                 <p className='font-medium text-gray-500 w-[90%]'>{subheading}</p>
 
@@ -98,11 +125,11 @@ const Contactform = ({heading,subheading}) => {
           </label>
           <input
           className='p-2 w-full rounded-md bg-slate-700 text-white py-3 outline-none'
-            type='email'
-            name='email'
+            type='phone'
+            name='phone'
             placeholder='Enter Email Address'
             required
-            value={data.email}
+            value={data.phone}
             onChange={(e) => setData(prev => ({
             ...prev,
             [e.target.name]: e.target.value
@@ -122,20 +149,21 @@ const Contactform = ({heading,subheading}) => {
           </label>
           <textarea
           className='p-2 w-full min-h-[150px] rounded-md bg-slate-700 text-white py-3 outline-none'
-            type='email'
-            name='email'
+            type='message'
+            name='message'
             placeholder='Enter Email Address'
             required
-            value={data.email}
+            value={data.message}
             onChange={(e) => setData(prev => ({
             ...prev,
             [e.target.name]: e.target.value
             }))}
           />
          </div>  
-             <div className='w-[90%] mb-10'>
-            <Button action={true} text={"Send Message"} width={true}/>
-             </div>
+             <button type="submit" className="mb-12 w-[90%] bg-[#FFD60A] p-2 rounded-md text-lg font-medium">
+              {/* <Button action={true} text="Sign in" width={true} /> */}
+             contact us
+          </button>
             </form>
     </div>
   )

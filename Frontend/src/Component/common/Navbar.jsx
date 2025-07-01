@@ -6,14 +6,14 @@ import './Navbar.css'
 import { FaBars } from "react-icons/fa";
 import {AuthContext} from "../../ContextApi/Auth"
 import { useContext } from 'react';
-import { FaAngleDoubleDown } from "react-icons/fa";
+import { IoIosArrowDropdownCircle } from "react-icons/io";
 import { MdOutlineDashboard } from "react-icons/md"
 import { IoIosLogOut } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Navbar = () => {
-  //context aspi data to handle ot log or not log with help of token
+  //context api data to handle ot log or not log with help of token
     const { data,isLog,setData,setLog } =useContext(AuthContext);
     //help in drop menu dashboard+logout
     const [drop,setDrop] =useState(false);
@@ -96,10 +96,10 @@ const Navbar = () => {
        <div>
           {
             //if login show circle+dropdown
-        isLog ?<div className='relative flex flex-row gap-3 items-center p-2 bg-slate-600'>
+        isLog ?<div className='relative flex flex-row gap-2 items-center p-2 bg-[#161D29]'>
         {/* <div className='rounded-full'>user.</div> */}
         <img  onClick={() => navigate("/")} className='cursor-pointer rounded-full h-8 w-8 border-2 border-white' src={`${data?.thumbnail}`}/>
-        <div onClick={()=>setDrop(!drop)}><FaAngleDoubleDown className='cursor-pointer text-white text-xl'/>
+        <div onClick={()=>setDrop(!drop)}><IoIosArrowDropdownCircle className='cursor-pointer text-gray-600 text-xl'/>
         {/* //handling dropdown here */}
         {drop ?  <div className='absolute z-10 -left-8 -bottom-14 bg-slate-700'>
           <div className='flex items-center justify-around border-b-2 border-gray-400 p-1 text-white text-sm flex-row gap-1'><MdOutlineDashboard className='text-white'/> DashBoard</div>

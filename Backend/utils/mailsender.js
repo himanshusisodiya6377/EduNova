@@ -17,9 +17,9 @@ const SendMail=async(email,title,body)=>{
         //sending mail
         const response=await transporter.sendMail({
             from:"hsisodia988766@gmail.com",
-            to:email,
-            subject:body,
-            text:title,
+            to:`${email}`,
+            subject: `${title}`,
+            html: `${body}`,
         })
         
         console.log(response);

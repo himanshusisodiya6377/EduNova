@@ -1,4 +1,5 @@
 const mailsend=require("../utils/mailsender");
+const contactUsEmail=require("../mail/templates/contactFormRes");
 
 const ContactUs=async(req,res)=>{
     try{
@@ -17,7 +18,7 @@ const ContactUs=async(req,res)=>{
         })
        }
   
-    await mailsend(email,`thanks ${firstname} ${lastname} for contacting us`,"thanks");
+    await mailsend(email,`thanks ${firstname} ${lastname} for contacting us`,contactUsEmail(email,firstname,lastname,message,phone));
        
     return res.status(201).json({
         success:true,

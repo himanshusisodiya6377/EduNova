@@ -6,6 +6,9 @@ import Singup from './pages/Singup'
 import Navbar from "./Component/common/Navbar"
 import {AuthProvider} from "../src/ContextApi/Auth"
 import ContactUs from './pages/ContactUs'
+import { Toaster } from 'react-hot-toast';
+import About from './pages/About'
+
 
 function App() {
 
@@ -13,6 +16,7 @@ function App() {
     <>
      <div>
      {/* //navbar fix everywhere */}
+    <Toaster position="top-right" />
      <AuthProvider>
       <Navbar/>
       <Routes>
@@ -20,6 +24,7 @@ function App() {
         <Route path="/login" element={<Login/>} />
         <Route path="/singup" element={<Singup/>} />
         <Route path="/contact" element={<ContactUs/>} />
+         <Route path="/about" element={<About/>} />
       </Routes>
      </AuthProvider>
      </div>

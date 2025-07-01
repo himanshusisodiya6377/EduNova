@@ -5,7 +5,7 @@ import { IoIosCall } from "react-icons/io";
 import Contactform from '../Component/Homepage/Contactform';
 
 const ContactUs = () => {
-   
+   //simple contact form
 
   return (
     <div className='bg-[#000814] min-h-screen '>

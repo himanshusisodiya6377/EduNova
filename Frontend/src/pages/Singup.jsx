@@ -9,6 +9,7 @@ import { useEffect } from 'react'
 import axios from "axios";
 
 const Singup = () => {
+  //maintaing useState to update values in onject
    const[data,setData]=useState({
       firstname:"",
       lastname:"",
@@ -16,12 +17,14 @@ const Singup = () => {
       password:"",
       confirmpassword:""
      })
+     //handling whether password be shown or not
    const[showpass1,setShowpass1]=useState(false)
   const[showpass2,setShowpass2]=useState(false)
  
   //toogle true for student
   const[role,setRole]=useState(true)
   
+  //according first set student but when role changes it updated
    useEffect(() => {
   setData(prev => ({
     ...prev,
@@ -31,10 +34,11 @@ const Singup = () => {
 
      const handleSubmit=async(event)=>{
          event.preventDefault();
-         //baki code yaha hoga
+         //sending data to backend
          try{
             const response=await axios.post("http://localhost:5173/EduNova/User/singup",{
               data},{
+                //handling cookie
                 withCredentials:true,
               });
               console.log(response);
@@ -104,10 +108,9 @@ const Singup = () => {
             type='lastname'
             name='lastname'
             placeholder='Enter Last Name'
-            required
-            value={data.lastname}
+              value={data.lastname}
             onChange={(e) => setData(prev => ({
-            ...prev,
+            ...prev, required,
             [e.target.name]: e.target.value
             }))}
           />

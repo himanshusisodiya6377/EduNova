@@ -222,7 +222,7 @@ const sendOtp=async(req,res)=>{
 //verifytoken
 const verifytoken=async(req,res)=>{
     try{
-      const token=req.cookies.token || req.body.token || req.header("Authorization")?.replace("Bearer ", "");
+      const token=req.cookies?.token || req.body?.token || req.header("Authorization")?.replace("Bearer ", "");
        
        //console.log(token);
        if(!token){
@@ -239,10 +239,11 @@ const verifytoken=async(req,res)=>{
             message:"token verification fail!",
         })
        }
-      const user=User.findOne({_id:payload._id});
+      const user=await User.findOne({_id:payload._id});
        req.user=payload;
        return res.status(201).json({
         success:true,
+        user,
         message:"user is verified!",
        })
     }
@@ -250,7 +251,6 @@ const verifytoken=async(req,res)=>{
          console.error(error);
       return res.status(401).json({
         success:false,
-        user,
         message:"user authentication failed!"
       })
     }
