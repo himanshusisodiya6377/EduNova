@@ -7,7 +7,7 @@ const Heading = ({heading,subheading,action}) => {
       <p>
         <TextGrad text={heading}/>
       </p>
-      <p className='font-medium text-medium w-[80%] text-gray-600'>
+      <p className='font-medium text-medium lg:w-[80%] text-gray-600'>
         {subheading}
       </p>
     </div>

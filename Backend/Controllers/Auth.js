@@ -239,7 +239,13 @@ const verifytoken=async(req,res)=>{
             message:"token verification fail!",
         })
        }
-      const user=await User.findOne({_id:payload._id});
+    // console.log(payload)
+    // console.log(payload.id)
+      const user=await User.findById(payload.id).populate("Profile").populate("courses").exec();
+    //  console.log(user)
+    //   console.log("User profile value:", user.Profile); 
+      //   console.log(user.profile)
+    //   console.log(user);
        req.user=payload;
        return res.status(201).json({
         success:true,

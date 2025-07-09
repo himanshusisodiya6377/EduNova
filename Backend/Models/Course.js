@@ -14,7 +14,8 @@ const courseSchema=mongoose.Schema({
         required:true,
     },
     category:{
-        type:String,
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Category",
     },
     tags:[{
        type:String,

@@ -3,13 +3,15 @@ const User=require("../Models/User")
 const Mailsender=require("../utils/mailsender")
 const bcrypt=require("bcrypt")
 
+
 exports.resettoken=async(req,res)=>{
     try{
         
         const {email}=req.body;
+        // console.log(email)
 
         const user=await User.findOne({email});
-        
+
         if(!user){
            return res.status(401).json({
             success:false,
@@ -18,7 +20,7 @@ exports.resettoken=async(req,res)=>{
         }
 
         const token = Crypto.randomUUID();
-
+         console.log(token)
         //updating user with token
 
        const updateUser = await User.findByIdAndUpdate(
@@ -30,7 +32,7 @@ exports.resettoken=async(req,res)=>{
           { new: true }
            );
 
-        const url=`https://localhost:3000/${token}`;//frontent link
+        const url=`http://localhost:5173/reset_password/${token}`;//frontent link
         
         await Mailsender(email,"Reset password link",url);
 
@@ -56,7 +58,8 @@ exports.resetPassword=async(req,res)=>{
     try{
     //    console.log("hi")
         const{password,confirmpassword,token}=req.body;
-       
+        // const token=req.params.token;
+    //    console.log(password,confirmpassword,token)
        if(!password || !confirmpassword || !token){
         return res.status(401).json({
             success:false,
@@ -73,7 +76,7 @@ exports.resetPassword=async(req,res)=>{
         })
        }
 
-       if(!user.Expires>Date.now()){
+       if(user.Expires<Date.now()){
         return res.status(401).json({
             success:false,
             message:"token expires!"

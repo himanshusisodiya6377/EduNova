@@ -4,6 +4,7 @@ const Course=require("../Models/Course");
 const User = require("../Models/User");
 const subsection=require("../Models/Subsection")
 const Section=require("../Models/Section")
+// import { useParams } from 'react-router-dom'
 //const Category=require("../Models/Category");
 
 
@@ -99,7 +100,7 @@ exports.getAllcourses=async(req,res)=>{
             price:true,
             category:true,
             thumbnail:true,
-        }).populate("CourseUsers").exec();
+        }).populate("CourseUsers").populate("category").exec();
 
         if(!courses){
             return res.status(401).json({
@@ -205,5 +206,35 @@ exports.getInstructorcourse=async(req,res)=>{
             success:false,
             message:"deletion of course failed!"
          })
+    }
+}
+
+exports.getoneCourse=async(req,res)=>{
+    try{
+        const id=req.params.id
+        // console.log(id)
+        // console.log("aaya")
+        if(!id){
+            return res.status(400).json({
+                status:false,
+                message:"id is missing"
+            })
+        }
+
+        const course=await Course.findById(id);
+        console.log(course)
+
+        return res.status(200).json({
+            status:true,
+            course,
+            message:"course fetch successfully"
+        })
+    }
+    catch(error){
+        console.log(error);
+        return res.status(500).json({
+            status:false,
+            message:"fetching course fail"
+        })
     }
 }

@@ -12,7 +12,7 @@ router.delete("/logout",logout)
 router.get("/verifyuser",verifytoken)
 
 router.post("/resettoken",resettoken);
-router.put("/changepassword",Auth,resetPassword);
+router.put("/changepassword",resetPassword);
 
 
 

@@ -9,11 +9,12 @@ import { NavLink } from 'react-router-dom'
 import axios from 'axios'
 import { useContext } from 'react'
 import {AuthContext} from "../ContextApi/Auth"
+import { useNavigate } from 'react-router-dom'
 
 //page for login and singup 
 const Login = () => {
     const { data,isLog,setData,setLog } =useContext(AuthContext);
-
+    const navigate=useNavigate();
    const[data1,setData1]=useState({
     email:"",
     password:""
@@ -27,6 +28,7 @@ const Login = () => {
           const response=await axios.post("http://localhost:3000/EduNova/User/login",data1,{withCredentials:true,});
           setData(response.data.user);
           setLog(true);
+          navigate("/dashboard");
           setData1({
             email:"",
             password:""
@@ -39,6 +41,8 @@ const Login = () => {
      }
     // baki code idr hoga
    }
+
+  //  console.log(data)
 
   return (
     <div className='bg-[#000814]'>
@@ -98,7 +102,7 @@ const Login = () => {
            onClick={() => setShowpass(!showpass)}>
           {showpass?<AiOutlineEye/>:<AiOutlineEyeInvisible/>}
          </span>
-         <NavLink className='text-blue-400 text-sm absolute right-3 translate-y-20'>Forgot Password</NavLink>
+         <NavLink to={"/resetpassword"}  className='text-blue-400 text-sm absolute right-3 translate-y-20'>Forgot Password</NavLink>
         
          </div>
            <button type="submit" className="mt-12 bg-[#FFD60A] p-2 rounded-md text-lg font-medium">
