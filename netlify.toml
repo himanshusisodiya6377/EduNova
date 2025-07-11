@@ -3,5 +3,8 @@
   command = "npm run build"
   publish = "build"
 
+ 
+  NODE_VERSION = "18"
+
 
   directory = "netlify/functions"
