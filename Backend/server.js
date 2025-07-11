@@ -18,7 +18,7 @@ const app=express();
 
 //connecting to frontend
 app.use(cors({
-  origin: 'http://localhost:5173',  // replace with your frontend port
+   origin: "https://beamish-blancmange-48eab8.netlify.app",  // replace with your frontend port
   credentials: true                // if you're sending cookies
 }));
 
