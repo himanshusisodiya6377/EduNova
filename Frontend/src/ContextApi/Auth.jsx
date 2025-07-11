@@ -54,7 +54,7 @@ const push = (ele) => {
 useEffect(()=>{  
    const Authfun=async()=>{ 
      try{
-     const res=await axios.get(`${process.env.REACT_APP_SERVER_URL}/EduNova/User/verifyuser`,{
+     const res=await axios.get(`${process.env.VITE_BACKEND_URL}/EduNova/User/verifyuser`,{
         withCredentials:true,
      });
      setData(res.data.user);

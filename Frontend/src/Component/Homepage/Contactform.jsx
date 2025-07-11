@@ -24,7 +24,7 @@ const Contactform = ({heading,subheading,action}) => {
       phone:"",
       message:""
         })
-      await axios.post(`${process.env.REACT_APP_SERVER_URL}/EduNova/contactus`,data,{
+      await axios.post(`${process.env.VITE_BACKEND_URL}/EduNova/contactus`,data,{
           withCredentials:true,
         })
           toast.success('Form submitted successfully!',{

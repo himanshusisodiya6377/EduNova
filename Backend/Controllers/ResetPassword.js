@@ -32,7 +32,7 @@ exports.resettoken=async(req,res)=>{
           { new: true }
            );
 
-        const url=`${process.env.REACT_APP_SERVER_URL}/reset_password/${token}`;//frontent link
+        const url=`${process.env.VITE_BACKEND_URL}/reset_password/${token}`;//frontent link
         
         await Mailsender(email,"Reset password link",url);
 
