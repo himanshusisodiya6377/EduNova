@@ -24,7 +24,7 @@ useEffect(() => {
 //logic to push course in localstorage object
 const push = (ele) => {
   const existingArray = JSON.parse(localStorage.getItem("data")) || [];
-  console.log(ele)
+  // console.log(ele)
   // console.log("yes")
   // Check if object with same _id already exists
   //it will iterate to all and check same id object

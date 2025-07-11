@@ -19,7 +19,7 @@ const Catalog = () => {
       try {
         const course = await axios.get("http://localhost:3000/EduNova/Course/getallcourse");
         
-        console.log(course)
+        // console.log(course)
          if(course){
           setData(course.data.courses);
          }

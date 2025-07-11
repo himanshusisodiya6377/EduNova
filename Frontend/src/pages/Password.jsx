@@ -29,7 +29,7 @@ const Password = () => {
             //sending email as element of object as direct string cant be destructure
             //sending data with post request
           
-            console.log(data)
+            // console.log(data)
             await axios.put("http://localhost:3000/EduNova/User/changepassword",data,{withCredentials:true});
             // setData("")
         }

@@ -34,7 +34,7 @@ exports.creatCategory=async(req,res)=>{
 exports.showAllcategory=async(req,res)=>{
     try{
         const category=await CategoryModel.find({});
-        console.log(category)
+        // console.log(category)
           return res.status(201).json({
             success:true,
             category,

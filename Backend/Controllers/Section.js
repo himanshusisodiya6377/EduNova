@@ -62,7 +62,7 @@ exports.UpdateSection=async(req,res)=>{
             message:"please provide all credentials!"
         })
        }
-       console.log("chal rha he")
+    //    console.log("chal rha he")
 
        const section=await Section.findOneAndUpdate({_id:SectionId},{
         sectionName:SectionName},

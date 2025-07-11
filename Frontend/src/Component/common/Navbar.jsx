@@ -35,7 +35,7 @@ const Navbar = () => {
           withCredentials:true,
         })
         setCat(resp.data.category);
-        console.log(resp)
+        // console.log(resp)
       }
       catch(error){
         console.log(error);
@@ -43,18 +43,18 @@ const Navbar = () => {
        }
        getcatdata();
     },[])
-    console.log(data)
+    // console.log(data)
 
     const handleLogout=async()=>{
       //handle logout by deleting token form cookie+setting context api data and log null and false that render the components 
       //where they are used
       //httponly so remove from backend call an api
         try {
-    console.log("Logout triggered");
+    // console.log("Logout triggered");
     await axios.delete("http://localhost:3000/EduNova/User/logout", {
       withCredentials: true,
     });
-    console.log("Logout API success");
+    // console.log("Logout API success");
     setData(null);
     setLog(false);
     // localStorage.clear

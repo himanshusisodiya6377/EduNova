@@ -20,7 +20,7 @@ const creatprofile=async(req,res)=>{
             gender,about,DOB:dob,phone
         })
         // console.log("hi2")
-         console.log(profile)
+        //  console.log(profile)
         const updateuser=await userModel.findByIdAndUpdate({_id:userId},{
             Profile:profile._id,
         },  {new:true})

@@ -71,7 +71,7 @@ const Singup=async(req,res)=>{
             thumbnail:imgUrl
          }) 
      
-         console.log(user);
+        //  console.log(user);
 
         return res.status(201).json({
             success:true,
@@ -152,7 +152,7 @@ const login=async(req,res)=>{
 const logout=async(req,res)=>{
     try{
       const token=req.cookies.token || req.body.token || req.header("Authorization")?.replace("Bearer ", "");
-      console.log(token)
+    //   console.log(token)
       if(token){
         res.clearCookie("token",{
             httpOnly:true,
@@ -202,7 +202,7 @@ const sendOtp=async(req,res)=>{
             specialChars:false,
          })
          }
-        console.log(otp);
+        // console.log(otp);
         const otpres=await Otp.create({otp,email})
         return res.status(201).json({
             success:true,

@@ -222,7 +222,7 @@ exports.getoneCourse=async(req,res)=>{
         }
 
         const course=await Course.findById(id);
-        console.log(course)
+        // console.log(course)
 
         return res.status(200).json({
             status:true,

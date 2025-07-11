@@ -20,7 +20,7 @@ exports.resettoken=async(req,res)=>{
         }
 
         const token = Crypto.randomUUID();
-         console.log(token)
+        //  console.log(token)
         //updating user with token
 
        const updateUser = await User.findByIdAndUpdate(

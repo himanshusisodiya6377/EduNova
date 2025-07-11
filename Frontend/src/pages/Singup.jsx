@@ -41,7 +41,7 @@ const Singup = () => {
                 //handling cookie
                 withCredentials:true,
               });
-              console.log(response);
+              // console.log(response);
          }
          catch(error){
           console.log(error);

@@ -22,7 +22,7 @@ const SendMail=async(email,title,body)=>{
             html: `${body}`,
         })
         
-        console.log(response);
+        // console.log(response);
         return response;
         //return res 
         // return res.status(201).json({
