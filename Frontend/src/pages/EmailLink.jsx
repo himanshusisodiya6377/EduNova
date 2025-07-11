@@ -14,7 +14,7 @@ const EmailLink = () => {
         try{
             //sending email as element of object as direct string cant be destructure
             //sending data with post request
-            await axios.post("http://localhost:3000/EduNova/User/resettoken",{email},{withCredentials:true});
+            await axios.post(`${process.env.REACT_APP_SERVER_URL}/EduNova/User/resettoken`,{email},{withCredentials:true});
             setEmail("")
         }
         catch(error){

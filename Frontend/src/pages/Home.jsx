@@ -5,7 +5,7 @@ import Button from "../Component/Homepage/Button";
 import banner from "../assets/Images/banner.mp4";
 import TextImage from "../Component/Homepage/TextImage";
 import boxoffice from "../assets/Images/boxoffice.png"
-import Foundingstory from "../assets/Images/Home.png"
+import Foundingstory from "../assets/Images/home.png"
 import {NavLink} from "react-router-dom"
 import frame from '../assets/Images/bghome.svg';
 import DottedSection from "../Component/Homepage/DottedSection";

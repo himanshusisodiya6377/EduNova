@@ -10,19 +10,7 @@ const EnrolledCourses = () => {
   
   // const[data,setData]=useState(null);
 
-//  useEffect(async()=>{
-//   try{
-//     const course=await axios.get("http://localhost:3000/EduNova/Course/getallcourse");
-//     if(course){
-//       setData(course);
-//       console.log(course);
-//     }
-//   } 
-//   catch(error){
-//     console.log(error);
-//   }
 
-//  },[])
 
 
   return (
