@@ -10,7 +10,7 @@ const user=require("./Routes/user");
 const cookieParser = require("cookie-parser");
 const cors = require('cors');
 const Category=require("./Routes/Category")
-
+require("dotenv")
 
 PORT=process.env.PORT || 8080;
 
@@ -18,7 +18,7 @@ const app=express();
 
 //connecting to frontend
 app.use(cors({
-  origin: 'https://localhost:5173',  // replace with your frontend port
+  origin:process.env.URL,  // replace with your frontend port
   credentials: true                // if you're sending cookies
 }));
 
