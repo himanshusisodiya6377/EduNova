@@ -1,5 +1,6 @@
 import React from 'react'
-import Image from "../../assets/Images/Timelineimage.png"
+import Image from "../../assets/Images/TimelineImage.png"
+
 
 const PhotoOverlap = () => {
   return (
