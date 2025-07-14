@@ -36,7 +36,7 @@ const Singup = () => {
          event.preventDefault();
          //sending data to backend
          try{
-            const response=await axios.post(`${process.env.VITE_BACKEND_URL}/EduNova/User/singup`,{
+            const response=await axios.post("http://localhost:3000/EduNova/User/singup",{
               data},{
                 //handling cookie
                 withCredentials:true,

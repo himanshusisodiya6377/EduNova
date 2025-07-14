@@ -14,7 +14,7 @@ const EnrolledCourses = () => {
 
 
   return (
-    <div className='text-white'>
+    <div className='text-white min-h-screen'>
     <div>
      <p className='text-white text-3xl font-semibold '>Enrolled Courses</p>
     </div>

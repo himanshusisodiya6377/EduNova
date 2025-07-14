@@ -15,28 +15,28 @@ const Cart = () => {
     pull(ele);
   }
   return (
-    <div>
+    <div className='min-h-screen'>
     {/* //heading */}
        <p className='text-white text-3xl font-semibold '>
         Cart
       </p>
 
        <p className='mt-12 w-full border-b-[1px] pb-2 border-white text-xl text-gray-500'>{count} Courses in Cart</p>
-        <div className='flex flex-row gap-4'>
+        <div className='flex md:flex-row flex-col-reverse gap-4'>
 
         {/* //Courses */}
 
-          <div className='w-3/4 flex flex-col gap-4'>
+          <div className='md:w-3/4 flex flex-col gap-4'>
              {data.map((ele,id)=>{
-             return <div className='w-full mt-2 flex flex-row' key={id}>
-                    <div className='flex flex-row gap-4'>
-                     <img className='w-[40%] ' src={ele.thumbnail}/>
+             return <div className='w-full mt-2 flex md:flex-row flex-col' key={id}>
+                    <div className='flex md:flex-row flex-col gap-4'>
+                     <img className='md:w-[40%] w-full ' src={ele.thumbnail}/>
                      <div className="text-white mt-3">
-                      <p className='font-semibold text-xl'>{ele.courceName}</p>
+                      <p className='font-semibold md:text-xl text-2xl'>{ele.courceName}</p>
                       <p className='tetx-medium font-medium text-gray-500'>{ele.description}</p>
                     </div>
                    </div>
-                    <div className='text-white flex flex-col'>
+                    <div className='text-white flex mt-4 md:mt-0 pb-40 md:pb-0 flex-col'>
                       <button onClick={()=>handleRemove(ele)} className='flex flex-row gap-2 items-center text-[#ef476f] bg-[#2c333f] p-3 rounded-xl text-lg'><RiDeleteBin6Line className='text-[#ef476f]'/> Remove</button>
                       <p className='text-2xl mt-2 text-yellow-400 text-bold'>Rs. {ele.price}</p>
                     </div>

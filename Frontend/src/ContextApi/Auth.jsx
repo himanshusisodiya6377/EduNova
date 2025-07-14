@@ -9,6 +9,7 @@ const [data,setData]=useState(null);
 const [isLog,setLog]=useState(false);
 const[count,setCount]=useState(0);
 const [price,setPrice]=useState(0);
+const [step,setStep]=useState(1);
 //letting know form middleware auth whether user has token to login if have that is write 
 //that i will set data and islog this will done for firsttime only intially
 //but when user change data or isLOg it will render whole component expect useeffect
@@ -34,7 +35,7 @@ const push = (ele) => {
   if (!exists) {
     //if object doesnt exist 
     existingArray.push(ele); // push the full object
-   setPrice(prev => prev + ele.price);
+    setPrice(prev => prev + ele.price);
     localStorage.setItem("data", JSON.stringify(existingArray));
     setCount(existingArray.length);
   }
@@ -54,7 +55,7 @@ const push = (ele) => {
 useEffect(()=>{  
    const Authfun=async()=>{ 
      try{
-     const res=await axios.get(`${process.env.VITE_BACKEND_URL}/EduNova/User/verifyuser`,{
+     const res=await axios.get("http://localhost:3000/EduNova/User/verifyuser",{
         withCredentials:true,
      });
      setData(res.data.user);
@@ -70,7 +71,7 @@ Authfun();
 },[]
 )
 
-return <AuthContext.Provider value={{data,isLog,setData,setLog,count,push,pull,price}}>
+return <AuthContext.Provider value={{data,isLog,setData,setLog,count,push,pull,price,step,setStep}}>
     {children}
 </AuthContext.Provider>
 }

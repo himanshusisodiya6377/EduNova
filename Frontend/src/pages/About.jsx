@@ -4,7 +4,7 @@ import img2 from "../assets/Images/aboutus2.webp"
 import img3 from "../assets/Images/aboutus3.webp"
 import Heading from '../Component/About/Heading'
 import img4 from "../assets/Images/FoundingStory.png"
-import Gridsqaure from '../Component/About/Gridsqaure'
+import Gridsqaure from '../Component/About/gridsqaure'
 import {Grid} from "../data/aboutgrid"
 import Contactform from '../Component/Homepage/Contactform'
 

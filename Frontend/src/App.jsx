@@ -19,6 +19,11 @@ import Catalog from './pages/Catalog'
 import Course from './pages/Course'
 import EmailLink from './pages/EmailLink'
 import Password from "./pages/Password"
+import AddCourse from "./pages/Dashboard/AddCourse"
+import Step1 from './pages/Dashboard/Steps/Step1'
+import Step2 from './pages/Dashboard/Steps/Step2'
+import Step3 from './pages/Dashboard/Steps/Step3'
+
 
 function App() {
 
@@ -30,24 +35,32 @@ function App() {
      <AuthProvider>
       <Navbar/>
       <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/singup" element={<Singup/>} />
-        <Route path="/contact" element={<ContactUs/>} />
-        <Route path="/courses/:id" element={<Course/>} />
-        <Route path="/resetpassword" element={<EmailLink/>} />
-        <Route path="/reset_password/:token" element={<Password/>} />
-         <Route path='/catalog/:category' element={<Catalog/>}/> 
-         <Route path="/about" element={<About/>} />
-         <Route path='/dashboard' element={<PrivateRoute><Dashboard/></PrivateRoute>}>
-          <Route index element={<Profile />} />
-         <Route path='/dashboard/profile' element={<Profile/>}/> 
-         <Route path='/dashboard/mycourse' element={<MyCourse/>}/>     
-         <Route path='/dashboard/enrolledcourses' element={<EnrolledCourses/>}/>
-         <Route path='/dashboard/setting' element={<Setting/>}/>
-          <Route path='/dashboard/cart' element={<Cart/>}/>
-        </Route>
-      </Routes>
+     <Route path="/" element={<Home />} />
+     <Route path="/login" element={<Login />} />
+     <Route path="/singup" element={<Singup />} />
+     <Route path="/contact" element={<ContactUs />} />
+     <Route path="/courses/:id" element={<Course />} />
+     <Route path="/resetpassword" element={<EmailLink />} />
+     <Route path="/reset_password/:token" element={<Password />} />
+     <Route path="/catalog/:category" element={<Catalog />} />
+     <Route path="/about" element={<About />} />
+
+  {/* Dashboard routes */}
+       <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>}>
+       <Route index element={<Profile />} />
+       <Route path="profile" element={<Profile />} />
+       <Route path="mycourse" element={<MyCourse />} />
+       <Route path="addcourse" element={<AddCourse />}>
+       <Route index element={<Step1 />} />
+       <Route path="step2" element={<Step2 />} />
+       <Route path="step3" element={<Step3 />} />
+    </Route>
+       <Route path="enrolledcourses" element={<EnrolledCourses />} />
+       <Route path="setting" element={<Setting />} />
+       <Route path="cart" element={<Cart />} />
+  </Route>
+</Routes>
+
      </AuthProvider>
      </div>
    

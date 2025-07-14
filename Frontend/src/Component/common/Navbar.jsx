@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { IoIosArrowDown } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
+import Bars from '../../pages/Bars/Bars';
 
 
 const Navbar = () => {
@@ -23,15 +24,35 @@ const Navbar = () => {
     //stores data to be shown at catalog
     const [cat,setCat]=useState([]); 
 
+    //handle bars
+    const[bars,setBar]=useState(false);
+ 
+    useEffect(() => {
+      const handleResize = () => {
+      if (window.innerWidth >= 768) {
+      setBar(false);  // Close the sidebar on large screens
+     }
+       };
+
+       //adding to dom
+      window.addEventListener("resize", handleResize);
+        
+      handleResize(); // run on mount
+           //removing from document
+     return () => window.removeEventListener("resize", handleResize);
+       }, []);
 
     //help to navigate to particulare path
     const navigate =useNavigate();
+
+
+
 
     useEffect(()=>{
       //at rendering already stores data for catalog
        const getcatdata=async()=>{
         try{
-        const resp=await axios.get(`${process.env.VITE_BACKEND_URL}/EduNova/Admin/showcategory`,{
+        const resp=await axios.get("http://localhost:3000/EduNova/Admin/showcategory",{
           withCredentials:true,
         })
         setCat(resp.data.category);
@@ -45,13 +66,17 @@ const Navbar = () => {
     },[])
     // console.log(data)
 
+    const handleBars=()=>{
+      setBar(!bars)
+    }
+
     const handleLogout=async()=>{
       //handle logout by deleting token form cookie+setting context api data and log null and false that render the components 
       //where they are used
       //httponly so remove from backend call an api
         try {
     // console.log("Logout triggered");
-    await axios.delete(`${process.env.VITE_BACKEND_URL}/EduNova/User/logout`, {
+    await axios.delete("http://localhost:3000/EduNova/User/logout", {
       withCredentials: true,
     });
     // console.log("Logout API success");
@@ -104,7 +129,7 @@ const Navbar = () => {
        </div>
 
        {/* login+singup */}
-       <div>
+       <div className='hidden md:block'>
           {
             //if login show circle+dropdown
         isLog ?<div className='relative flex flex-row gap-4 items-center p-2 bg-[#000812]'>
@@ -139,7 +164,12 @@ const Navbar = () => {
        }
        </div>
        {/* bar */}
-       <FaBars id='navbar' className='texl-3xl text-white' />
+       <div className='md:hidden'>
+        {/* {setBar(false)} */}
+         <FaBars onClick={handleBars} id='navbar' className='reltive texl-3xl text-white' />
+       {bars && <Bars setbars={setBar} />}
+       </div>
+      
       </div>
     </div>
   )

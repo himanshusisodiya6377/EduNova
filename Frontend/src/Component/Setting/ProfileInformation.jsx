@@ -17,9 +17,9 @@ const ProfileInformation = () => {
        <p className='text-medium text-xl text-white font-semibold'>Profile Information</p>
        <form className='flex flex-col gap-10 w-full'>
        {/* //first section of form */}
-       <div className='flex flex-row w-full justify-between gap-4'>
+       <div className='flex md:flex-row flex-col w-full justify-between gap-4'>
         
-        <div className='flex flex-col gap-4 w-[46%]'>
+        <div className='flex flex-col gap-4 md:w-[46%]'>
          <div className='flex flex-col gap-2'>
             <label className='text-white font-medium text-medium'>First Name</label>
             <input
@@ -72,7 +72,7 @@ const ProfileInformation = () => {
          </div>
         </div>
         {/* //first section of form */}
-        <div  className='flex flex-col gap-4 w-[46%]'>
+        <div  className='flex flex-col gap-4 md:w-[46%]'>
 
 
           <div className='flex flex-col gap-2'>

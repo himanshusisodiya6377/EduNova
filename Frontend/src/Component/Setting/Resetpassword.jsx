@@ -12,8 +12,8 @@ const Resetpassword = () => {
     <div className='flex flex-col p-6 bg-[#161D29] mb-32 rounded-xl'>
        <p className='text-medium text-xl text-white font-semibold'>Password</p>
        <form className='flex flex-col gap-4 justify-between mt-4 w-full'>
-          <div  className='flex flex-row gap-4 justify-between w-full'>
-             <div className='flex flex-col gap-2 w-[46%]'>
+          <div  className='flex md:flex-row flex-col gap-4 justify-between w-full'>
+             <div className='flex flex-col gap-2 md:w-[46%]'>
             <label className='text-white font-medium text-medium'>Current Password</label>
             <input
             className='bg-[#2c333f] focus:outline-none p-2 rounded-md text-white border-b-2 border-gray-500'
@@ -30,7 +30,7 @@ const Resetpassword = () => {
             />
          </div>
 
-           <div className='flex flex-col gap-2 w-[46%]'>
+           <div className='flex flex-col gap-2 md:w-[46%]'>
             <label className='text-white font-medium text-medium'>New Password</label>
             <input
             className='bg-[#2c333f] focus:outline-none p-2 rounded-md text-white border-b-2 border-gray-500'

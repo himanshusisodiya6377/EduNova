@@ -30,7 +30,7 @@ const Password = () => {
             //sending data with post request
           
             // console.log(data)
-            await axios.put(`${process.env.VITE_BACKEND_URL}/EduNova/User/changepassword`,data,{withCredentials:true});
+            await axios.put("http://localhost:3000/EduNova/User/changepassword",data,{withCredentials:true});
             // setData("")
         }
         catch(error){

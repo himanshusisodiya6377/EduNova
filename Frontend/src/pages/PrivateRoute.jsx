@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom'
 
 const PrivateRoute = ({children}) => {
     const {isLog,data}=useContext(AuthContext);
-      // console.log(isLog)
+      console.log(isLog,"yes")
       // console.log(data)
   return isLog?children: <Navigate to="/"/>;
 }
