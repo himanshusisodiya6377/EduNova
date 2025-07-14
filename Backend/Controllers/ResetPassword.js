@@ -32,7 +32,7 @@ exports.resettoken=async(req,res)=>{
           { new: true }
            );
 
-        const url=`http://localhost:3000/reset_password/${token}`;//frontent link
+        const url=`https://localhost:3000/reset_password/${token}`;//frontent link
         
         await Mailsender(email,"Reset password link",url);
 

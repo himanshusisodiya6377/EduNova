@@ -21,7 +21,7 @@ const Course = () => {
   const fetchData = async () => {
     try {
       //here we usig params logic as sending id to backend api there we fetch using req.params.id
-      const course = await axios.get(`http://localhost:3000/EduNova/Course/getoneCourse/${id}`);
+      const course = await axios.get(`https://localhost:3000/EduNova/Course/getoneCourse/${id}`);
       if (course.data.course) {
         setData(course.data.course);
       }

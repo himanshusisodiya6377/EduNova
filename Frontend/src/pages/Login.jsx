@@ -25,7 +25,7 @@ const Login = () => {
       event.preventDefault();
      try{
       //sending data to backend using axios
-          const response=await axios.post("http://localhost:3000/EduNova/User/login",data1,{withCredentials:true,});
+          const response=await axios.post("https://localhost:3000/EduNova/User/login",data1,{withCredentials:true,});
           setData(response.data.user);
           setLog(true);
           navigate("/dashboard");

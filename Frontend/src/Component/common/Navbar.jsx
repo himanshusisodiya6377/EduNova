@@ -52,7 +52,7 @@ const Navbar = () => {
       //at rendering already stores data for catalog
        const getcatdata=async()=>{
         try{
-        const resp=await axios.get("http://localhost:3000/EduNova/Admin/showcategory",{
+        const resp=await axios.get("https://localhost:3000/EduNova/Admin/showcategory",{
           withCredentials:true,
         })
         setCat(resp.data.category);
@@ -76,7 +76,7 @@ const Navbar = () => {
       //httponly so remove from backend call an api
         try {
     // console.log("Logout triggered");
-    await axios.delete("http://localhost:3000/EduNova/User/logout", {
+    await axios.delete("https://localhost:3000/EduNova/User/logout", {
       withCredentials: true,
     });
     // console.log("Logout API success");
