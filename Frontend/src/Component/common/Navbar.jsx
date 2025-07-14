@@ -17,6 +17,7 @@ import Bars from '../../pages/Bars/Bars';
 
 
 const Navbar = () => {
+  const API_BASE = import.meta.env.VITE_BACKEND_URL;
   //context api data to handle ot log or not log with help of token
     const { data,isLog,setData,setLog,count} =useContext(AuthContext);
     //help in drop menu dashboard+logout
@@ -52,7 +53,7 @@ const Navbar = () => {
       //at rendering already stores data for catalog
        const getcatdata=async()=>{
         try{
-        const resp=await axios.get("https://localhost:3000/EduNova/Admin/showcategory",{
+        const resp=await axios.get(`${API_BASE}/EduNova/Admin/showcategory`,{
           withCredentials:true,
         })
         setCat(resp.data.category);
@@ -76,7 +77,7 @@ const Navbar = () => {
       //httponly so remove from backend call an api
         try {
     // console.log("Logout triggered");
-    await axios.delete("https://localhost:3000/EduNova/User/logout", {
+    await axios.delete(`${API_BASE}/EduNova/User/logout`, {
       withCredentials: true,
     });
     // console.log("Logout API success");

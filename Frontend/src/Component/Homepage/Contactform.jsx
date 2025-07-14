@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast';
 
 
 const Contactform = ({heading,subheading,action}) => {
+  const API_BASE = import.meta.env.VITE_BACKEND_URL;
      const[data,setData]=useState({
         firstname:"",
       lastname:"",
@@ -24,7 +25,7 @@ const Contactform = ({heading,subheading,action}) => {
       phone:"",
       message:""
         })
-      await axios.post("https://localhost:3000/EduNova/contactus",data,{
+      await axios.post(`${API_BASE}/EduNova/contactus`,data,{
           withCredentials:true,
         })
           toast.success('Form submitted successfully!',{

@@ -10,7 +10,7 @@ import { useParams } from 'react-router-dom';
 
 const Password = () => {
 
-
+const API_BASE = import.meta.env.VITE_BACKEND_URL;
   const {token}=useParams()
    
     const [data,setData]=useState({
@@ -30,7 +30,7 @@ const Password = () => {
             //sending data with post request
           
             // console.log(data)
-            await axios.put("https://localhost:3000/EduNova/User/changepassword",data,{withCredentials:true});
+            await axios.put(`${API_BASE}/EduNova/User/changepassword`,data,{withCredentials:true});
             // setData("")
         }
         catch(error){

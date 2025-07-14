@@ -12,6 +12,7 @@ import { IoIosLogOut } from "react-icons/io";
 import axios from 'axios';
 
 const Bars = ({setBar}) => {
+  const API_BASE = import.meta.env.VITE_BACKEND_URL;
      const navigate =useNavigate();
     const [drop,setDrop] =useState(false);
 
@@ -26,7 +27,7 @@ const Bars = ({setBar}) => {
       //at rendering already stores data for catalog
        const getcatdata=async()=>{
         try{
-        const resp=await axios.get("https://localhost:3000/EduNova/Admin/showcategory",{
+        const resp=await axios.get(`${API_BASE}/EduNova/Admin/showcategory`,{
           withCredentials:true,
         })
         setCat(resp.data.category);
@@ -51,7 +52,7 @@ const Bars = ({setBar}) => {
       //httponly so remove from backend call an api
         try {
     // console.log("Logout triggered");
-    await axios.delete("https://localhost:3000/EduNova/User/logout", {
+    await axios.delete(`${API_BASE}/EduNova/User/logout`, {
       withCredentials: true,
     });
     // console.log("Logout API success");

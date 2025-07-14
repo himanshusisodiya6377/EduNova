@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom'
 
 //page for login and singup 
 const Login = () => {
+   const API_BASE = import.meta.env.VITE_BACKEND_URL;
     const { data,isLog,setData,setLog } =useContext(AuthContext);
     const navigate=useNavigate();
    const[data1,setData1]=useState({
@@ -25,7 +26,7 @@ const Login = () => {
       event.preventDefault();
      try{
       //sending data to backend using axios
-          const response=await axios.post("https://localhost:3000/EduNova/User/login",data1,{withCredentials:true,});
+          const response=await axios.post(`{API_BASE}/EduNova/User/login`,data1,{withCredentials:true,});
           setData(response.data.user);
           setLog(true);
           navigate("/dashboard");

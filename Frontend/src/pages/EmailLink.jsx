@@ -5,6 +5,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
 
 const EmailLink = () => {
+  const API_BASE = import.meta.env.VITE_BACKEND_URL;
    
     const [email,setEmail]=useState("");
 
@@ -14,7 +15,7 @@ const EmailLink = () => {
         try{
             //sending email as element of object as direct string cant be destructure
             //sending data with post request
-            await axios.post("https://localhost:3000/EduNova/User/resettoken",{email},{withCredentials:true});
+            await axios.post(`${API_BASE}/EduNova/User/resettoken`,{email},{withCredentials:true});
             setEmail("")
         }
         catch(error){

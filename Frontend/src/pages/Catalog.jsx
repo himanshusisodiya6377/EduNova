@@ -9,6 +9,7 @@ const Catalog = () => {
   const [Data,setData]=useState([]);
   const {category}=useParams();
   const navigate=useNavigate();
+  const API_BASE = import.meta.env.VITE_BACKEND_URL;
   
   const handleclick=(id)=>{
       navigate(`/courses/${id}`)
@@ -17,7 +18,7 @@ const Catalog = () => {
  useEffect(() => {
     const fetchData = async () => {
       try {
-        const course = await axios.get("https://localhost:3000/EduNova/Course/getallcourse");
+        const course = await axios.get(`${API_BASE}/EduNova/Course/getallcourse`);
         
         // console.log(course)
          if(course){

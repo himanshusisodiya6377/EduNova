@@ -5,6 +5,7 @@ import { useState,useEffect } from "react";
 export const AuthContext=createContext();
 
 export const AuthProvider=({children})=>{
+  const API_BASE = import.meta.env.VITE_BACKEND_URL;
 const [data,setData]=useState(null);
 const [isLog,setLog]=useState(false);
 const[count,setCount]=useState(0);
@@ -55,7 +56,7 @@ const push = (ele) => {
 useEffect(()=>{  
    const Authfun=async()=>{ 
      try{
-     const res=await axios.get("https://localhost:3000/EduNova/User/verifyuser",{
+     const res=await axios.get(`${API_BASE}/EduNova/User/verifyuser`,{
         withCredentials:true,
      });
      setData(res.data.user);

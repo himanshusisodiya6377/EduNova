@@ -10,6 +10,7 @@ import axios from "axios";
 
 const Singup = () => {
   //maintaing useState to update values in onject
+  const API_BASE = import.meta.env.VITE_BACKEND_URL;
    const[data,setData]=useState({
       firstname:"",
       lastname:"",
@@ -36,7 +37,7 @@ const Singup = () => {
          event.preventDefault();
          //sending data to backend
          try{
-            const response=await axios.post("https://localhost:3000/EduNova/User/singup",{
+            const response=await axios.post(`${API_BASE}EduNova/User/singup`,{
               data},{
                 //handling cookie
                 withCredentials:true,
