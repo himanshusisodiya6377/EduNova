@@ -10,7 +10,7 @@ const user=require("./Routes/user");
 const cookieParser = require("cookie-parser");
 const cors = require('cors');
 const Category=require("./Routes/Category")
-require("dotenv")
+require("dotenv").config();
 
 PORT=process.env.PORT || 8080;
 
