@@ -18,7 +18,7 @@ const Catalog = () => {
  useEffect(() => {
     const fetchData = async () => {
       try {
-        const course = await axios.get(`${API_BASE}/EduNova/Course/getallcourse`);
+        const course = await axios.get(`${API_BASE}EduNova/Course/getallcourse`);
         
         // console.log(course)
          if(course){

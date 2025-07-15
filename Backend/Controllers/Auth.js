@@ -57,8 +57,8 @@ const Singup=async(req,res)=>{
                 success:false,
                 message:"otp not verified!"
             })
-         }
-
+        }
+        
         const imgUrl = `https://robohash.org/${firstname}`;
         const hashpwd=await bcrypt.hash(password,10);
 
