@@ -88,66 +88,67 @@ const Singup=async(req,res)=>{
     }
 }
 //login
-const login=async(req,res)=>{
-    try{
-        const {email,password}=req.body;
-        // console.log(email,password);
-        if(!email || !password){
-            return res.status(401).json({
-                success:false,
-                message:"please fill all credentials",
-            })
-        }
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
 
-        const user=await User.findOne({email});
-        
-
-        if(!user){
-            return res.status(401).json({
-                success:false,
-                message:"user doesnt exist",
-            })
-        }
-        
-        if(await bcrypt.compare(password,user.password)){
-               const payload={
-                email,
-                id:user._id,
-                accountType:user.accountType
-               }
-            // console.log(process.env.SECRET_KEY);
-            const token=await jwt.sign(payload,process.env.SECRET_KEY,{
-                expiresIn:"2h",
-            })
-
-            const option={
-                httpOnly:true,//not allowed to access in simple js document.cookie
-                expiresIn:new Date(Date.now+300000),
-            }
-
-            res.cookie("token",token,option);
-
-            return res.status(201).json({
-                success:true,
-                payload,
-                user,
-                message:"user login successfully!"
-            })
-        }
-        return res.status(401).json({
-            success:false,
-            message:"password is wrong"
-        })
-        
+    if (!email || !password) {
+      return res.status(401).json({
+        success: false,
+        message: "Please fill all credentials",
+      });
     }
-    catch(error){
-        console.error(error);
-        return res.status(401).json({
-            success:false,
-            message:"login failed!"
-        })
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "User doesn't exist",
+      });
     }
-}
+
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    if (!isPasswordCorrect) {
+      return res.status(401).json({
+        success: false,
+        message: "Password is wrong",
+      });
+    }
+
+    const payload = {
+      email,
+      id: user._id,
+      accountType: user.accountType,
+    };
+
+    const token = jwt.sign(payload, process.env.SECRET_KEY, {
+      expiresIn: "2h",
+    });
+
+    const options = {
+      httpOnly: true,
+      expires: new Date(Date.now() + 2 * 60 * 60 * 1000),
+      secure: true,
+      sameSite: "None",
+    };
+
+    res.cookie("token", token, options);
+
+    return res.status(201).json({
+      success: true,
+      payload,
+      user,
+      message: "User login successfully!",
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(401).json({
+      success: false,
+      message: "Login failed!",
+    });
+  }
+};
+
 
 const logout=async(req,res)=>{
     try{
