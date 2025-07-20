@@ -53,8 +53,8 @@ function App() {
        <Route path="addcourse" element={<AddCourse />}>
        <Route index element={<Step1 />} />
        <Route path="step2" element={<Step2 />} />
-       <Route path="step3" element={<Step3 />} />
-    </Route>
+       <Route path="step2/step3" element={<Step3 />} />
+      </Route>
        <Route path="enrolledcourses" element={<EnrolledCourses />} />
        <Route path="setting" element={<Setting />} />
        <Route path="cart" element={<Cart />} />

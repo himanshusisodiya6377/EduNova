@@ -10,14 +10,14 @@ export default function AddCourse() {
          {/* //outlet */}
          <Outlet/>
         </div>
-        <div className='bg-[#161D29] p-6 rounded-xl w-[45%]'>
+        <div className='bg-[#161D29] h-[55%] p-6 rounded-xl w-[45%]'>
          {/* //message */}
          {/* //heading */}
          <div className='flex flex-row gap-2 items-center text-white'>
             <AiFillThunderbolt className='text-yellow-400'/>
             <p className='text-xl'>Course Upload Tips</p>
          </div>
-         <ul className='text-white list-disc ml-5 marker:text-white text-sm flex flex-col gap-2 mt-8'>
+         <ul className='text-white list-disc marker:text-white text-sm flex flex-col gap-2 mt-8'>
             <li>Set the Course Price option or make it free.</li>
             <li>Standard size for the course thumbnail is 1024x576.</li>
             <li>Video section controls the course overview video.</li>

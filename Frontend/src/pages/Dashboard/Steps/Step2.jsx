@@ -1,9 +1,16 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
+import Stepprocess from '../Stepprocess'
+import { useContext } from 'react';
+import {AuthContext} from "../../../ContextApi/Auth"
 
 const Step2 = () => {
+    const {step,setStep}=useContext(AuthContext);
   return (
     <div>
-      <h1>hello</h1>
+       <Stepprocess/>
+      <NavLink  onClick={()=>setStep((prev)=>(prev+1))} to="step3">click</NavLink>
+         
     </div>
   )
 }

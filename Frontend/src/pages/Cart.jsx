@@ -8,7 +8,8 @@ const Cart = () => {
 
  
    
-  const data=JSON.parse(localStorage.getItem("data"));
+  const data = JSON.parse(localStorage.getItem("data")) || [];
+
   // console.log(data)
  
   const handleRemove=(ele)=>{
@@ -25,6 +26,7 @@ const Cart = () => {
         <div className='flex md:flex-row flex-col-reverse gap-4'>
 
         {/* //Courses */}
+        {data.length==0 ?  <p className='text-white w-full mt-10'>Your cart is empty.</p> : (
 
           <div className='md:w-3/4 flex flex-col gap-4'>
              {data.map((ele,id)=>{
@@ -44,6 +46,7 @@ const Cart = () => {
              </div>
               })}
           </div>
+        )}
            
            {/* //total price */}
          <div className='flex flex-col gap-4 w-[1/4] text-white p-3 rounded-xl'>

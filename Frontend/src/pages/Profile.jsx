@@ -18,10 +18,10 @@ const Profile = () => {
       <div className='bg-[#161D29] p-8 flex flex-col md:flex-row gap-4 items-center rounded-xl justify-between'>
       <div>
        <div className='flex flex-row gap-4'>
-        <img className='h-16 w-16 border rounded-full border-white' src={data.thumbnail}/>
+        <img className='h-16 w-16 border rounded-full border-white' src={data?.thumbnail}/>
         <div className='text-white'>
-         <p className='text-medium font-semibold'>{data.firstname} {data.lastname}</p>
-         <p className='text-gray-500'>{data.email}</p>
+         <p className='text-medium font-semibold'>{data?.firstname} {data?.lastname}</p>
+         <p className='text-gray-500'>{data?.email}</p>
         </div>
        </div>
       </div>
@@ -33,7 +33,7 @@ const Profile = () => {
         <div>
         <div className='text-white flex flex-col gap-4'>
          <p className='text-medium text-xl font-semibold'>About</p>
-         <p className='text-gray-500'>{data.Profile.about}</p>
+         <p className='text-gray-500'>{data?.Profile?.about}</p>
         </div>
         </div>
        <NavLink to={"/dashboard/setting"} className="w-full md:w-[20%] text-black text-medium font-medium text-center bg-yellow-400 p-2 rounded-xl" >Edit</NavLink>
@@ -49,29 +49,29 @@ const Profile = () => {
           <div className='flex flex-col gap-4 text-white'>
           <div>
             <p className='text-gray-500'>First Name</p>
-            <p className='text-medium font-medium'>{data.firstname}</p>
+            <p className='text-medium font-medium'>{data?.firstname}</p>
           </div>
           <div>
             <p className='text-gray-500'>Email</p>
-            <p className='text-medium font-medium'>{data.email}</p>
+            <p className='text-medium font-medium'>{data?.email}</p>
           </div>
           <div>
             <p className='text-gray-500'>Gender</p>
-            <p className='text-medium font-medium'>{data.Profile.gender}</p>
+            <p className='text-medium font-medium'>{data?.Profile?.gender}</p>
           </div>
           </div>
            <div className='flex flex-col gap-4 text-white'>
           <div>
             <p className='text-gray-500'>Last Name</p>
-            <p className='text-medium font-medium'>{data.lastname}</p>
+            <p className='text-medium font-medium'>{data?.lastname}</p>
           </div>
           <div>
             <p className='text-gray-500'>Phone Number</p>
-            <p className='text-medium font-medium'>{data.Profile.phone}</p>
+            <p className='text-medium font-medium'>{data?.Profile?.phone}</p>
           </div>
           <div>
             <p className='text-gray-500'>Date Of Birth</p>
-            <p className='text-medium font-medium'>{data.Profile.DOB}</p>
+            <p className='text-medium font-medium'>{data?.Profile?.DOB}</p>
           </div>
           </div> 
         </div>

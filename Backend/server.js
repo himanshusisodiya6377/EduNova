@@ -18,8 +18,8 @@ const app=express();
 
 //connecting to frontend
 app.use(cors({
-  origin:process.env.URL,  // replace with your frontend port
-  credentials: true                // if you're sending cookies
+  origin:process.env.URL,  
+  credentials: true                
 }));
 
 //start the server
